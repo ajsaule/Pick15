@@ -10,7 +10,7 @@ The game's objective is to align three consecutive tiles in a row, column or dia
 
 ## Thought Process / Wireframe
 
-1. Create 3x3 grid ❌
+1. Create game grid ❌
     - Each tile in the grid needs to be responsive to hover and on page events ❌
     - Each tile needs to have a unique identifier 
 
