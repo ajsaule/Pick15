@@ -12,6 +12,25 @@ body {
     align-items: center;
     background-color: #1d202c;
 }
+a.info-pane {
+    position: absolute;
+    font-weight: 600;
+    font-size: 25px;
+    right: 20px;
+    top: 15px;
+    cursor: pointer;
+}
+a.random-bot {
+
+}
+.bot-icon {
+    position: absolute;
+    cursor: pointer;
+    height: 100px;
+    left: 20px;
+    top: 15px;
+}
+
 .tile-reset {
     background-color: #293254;
     border-radius: 50px;
@@ -157,6 +176,9 @@ div.game-grid div {
 }
 
 @media screen and (max-width: 600px) {
+    .bot-icon {
+        height: 50px;
+    }
     .game-board {
         position: relative;
         width: 300px;

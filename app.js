@@ -17,7 +17,7 @@ const redScoreboard = document.querySelector('.red-score')
 var currentPlayersTurn = "red-player"
 var blueScore = 0
 var redScore = 0
-var isTheregameWinner = false
+var isThereWinner = false
 var gameWinner = ""
 var gameLoser = ""
 
@@ -40,28 +40,29 @@ var gameLoser = ""
 const checkWinner = (player) => {
     // TEST ROWS // any way to include less brackets??
     if ((tiles[0].classList.contains(player)) && (tiles[1].classList.contains(player)) && (tiles[2].classList.contains(player))) {
-        isTheregameWinner = true
+        isThereWinner = true
     } else if ((tiles[3].classList.contains(player)) && (tiles[4].classList.contains(player)) && (tiles[5].classList.contains(player))) {
-        isTheregameWinner = true
+        isThereWinner = true
     } else if ((tiles[6].classList.contains(player)) && (tiles[7].classList.contains(player)) && (tiles[8].classList.contains(player))) {
-        isTheregameWinner = true
+        isThereWinner = true
     }
     // TEST COLUMNS 
     if ((tiles[0].classList.contains(player)) && (tiles[3].classList.contains(player)) && (tiles[6].classList.contains(player))) {
-        isTheregameWinner = true
+        isThereWinner = true
     } else if ((tiles[1].classList.contains(player)) && (tiles[4].classList.contains(player)) && (tiles[7].classList.contains(player))) {
-        isTheregameWinner = true
+        isThereWinner = true
     } else if ((tiles[2].classList.contains(player)) && (tiles[5].classList.contains(player)) && (tiles[8].classList.contains(player))) {
-        isTheregameWinner = true
+        isThereWinner = true
     }
     // TEST DIAGONAL
     if ((tiles[0].classList.contains(player)) && (tiles[4].classList.contains(player)) && (tiles[8].classList.contains(player))) {
-        isTheregameWinner = true
+        isThereWinner = true
     } else if ((tiles[6].classList.contains(player)) && (tiles[4].classList.contains(player)) && (tiles[2].classList.contains(player))) {
-        isTheregameWinner = true
+        isThereWinner = true
     }
     // ASSIGN WINNER 
-    if (isTheregameWinner) {
+    // could store the below in it's own function? 
+    if (isThereWinner) {
         gameWinner = currentPlayersTurn
         alertMsg.textContent = "We have a winner!"
     }
@@ -70,9 +71,9 @@ const checkWinner = (player) => {
         redScore += 1
         redScoreboard.textContent = redScore
         gameLoser = "blue-player"
-    } else {
+    } else if (gameWinner === "blue-player") {
         blueScore += 1
-        blueScoreboard.textContent = redScore
+        blueScoreboard.textContent = blueScore
         gameLoser = "red-player"
     }
     // CHECK FOR DRAW
@@ -107,7 +108,7 @@ const turnHandler = () => {
         checkWinner(currentPlayersTurn)
         currentPlayersTurn = "blue-player"
     }
-    if (isTheregameWinner) {
+    if (isThereWinner) {
         disableBoard()
         // enter message for game winner.. print appropriate messages and animations
     }
@@ -123,6 +124,22 @@ const disableBoard = () => {
     }
 }
 
+const resetBoard = () => {
+    for (let i = 0; i < tiles.length; i++) {
+        tiles[i].className = "tile"
+        tiles[i].classList.add("tile-dwn")
+        alertMsg.textContent = "Board has been reset"
+        isThereWinner = false;
+    }
+    for (let i = 0; i < tiles.length; i++) {
+        tiles[i].addEventListener('click', turnHandler)
+    }
+    gameWinner = ""
+    gameLoser = ""
+    // Qns need to somehow reset the checkDraw tileCounter that is locally scoped so after reset there can draw again 
+
+}
+
 // ========================================================== //
 // ==================++ EVENT LISTENERS ++=================== //
 // ========================================================== //
@@ -130,5 +147,7 @@ const disableBoard = () => {
 for (let i = 0; i < tiles.length; i++) {
     tiles[i].addEventListener('click', turnHandler)
 }
+
+resetBtn.addEventListener('click', resetBoard)
 
 // What event listeners/ handlers do I need to setip to get things working!

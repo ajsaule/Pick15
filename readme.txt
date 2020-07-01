@@ -30,12 +30,13 @@ The game's objective is to align three consecutive tiles in a row, column or dia
     - If all tiles have been selected show 'IT'S A DRAW' message and highlight reset button // glow under it?
 
 4. Scoring 
-    - Write all scores and messages to the board as game progresses 
+    - Write all scores and messages to the board as game progresses ❌
     - Add + 1 to the winning player's tally ❌
     - Calculate a percentage of wins for each player 
     - Reset button resets the stored counts/ board's appearance/ score tally
 
 5. BONUS FEATURES 
+    - Add info pane that on hover or tap shows info on how to play the game 
     - Theme changer, allows user to change the bgcolors and glowing effects 
     - Create a bot to play against 
         - Random bot
