@@ -7,17 +7,22 @@
 // Query select into a var listeners to span's and p's of the bottom menu that will display messages
 // Set variables like score and player turn
 
-const tiles = document.querySelectorAll('.game-grid > div');
-const mainHeading = document.querySelector('.main-heading');
-const subHeading = document.querySelector('.sub-heading');
-const resetBtn = document.querySelector('#reset-btn');
-const alertMsg = document.querySelector('.alert-messages');
-const blueScoreboard = document.querySelector('.blue-score');
-const redScoreboard = document.querySelector('.red-score');
-var currentPlayersTurn = "red-player";
-var isThereWinner = false;
-var blueScore = 0;
-var redScore = 0;
+const tiles = document.querySelectorAll('.game-grid > div')
+const mainHeading = document.querySelector('.main-heading')
+const subHeading = document.querySelector('.sub-heading')
+const resetBtn = document.querySelector('#reset-btn')
+const alertMsg = document.querySelector('.alert-messages')
+const blueScoreboard = document.querySelector('.blue-score')
+const redScoreboard = document.querySelector('.red-score')
+// TURN VARS
+var currentPlayersTurn = "red-player"
+var blueScore = 0
+var redScore = 0
+// WINNER LOSER VARS
+var isThereWinner = false
+var winner = ""
+var loser = ""
+
 
 // ========================================================== //
 // ======================+ GAME LOGIC +====================== //
@@ -57,13 +62,23 @@ const checkWinner = (player) => {
     } else if ((tiles[6].classList.contains(player)) && (tiles[4].classList.contains(player)) && (tiles[2].classList.contains(player))) {
         isThereWinner = true;
     }
+    // ASSIGN WINNER 
+    if (isThereWinner) {
+        winner = currentPlayersTurn
+    }
+    // ASSIGN LOSER 
+    if (winner === "red-player") {
+        loser = "blue-player"
+    } else {
+        loser = "red-player"
+    }
 }
 
 const turnHandler = () => {
     if (currentPlayersTurn === "blue-player") {
-        event.target.classList.add('blue-player');
+        event.target.classList.add('blue-player')
         checkWinner(currentPlayersTurn)
-        currentPlayersTurn = "red-player";
+        currentPlayersTurn = "red-player"
         // insert a message for current players turn 
     } else {
         event.target.classList.add('red-player');
@@ -72,7 +87,14 @@ const turnHandler = () => {
     }
     if (isThereWinner) {
 
+        disableBoard()
+    } else {
+        // message game over 
     }
+}
+
+const disableBoard = () => {
+    // disable all the button functionalities and add animations, messages, etc. 
 }
 
 // ========================================================== //
@@ -83,4 +105,4 @@ for (let i = 0; i < tiles.length; i++) {
     tiles[i].addEventListener('click', turnHandler)
 }
 
-// What event listeners/ handlers do I need to setip to get this things working!
+// What event listeners/ handlers do I need to setip to get things working!
