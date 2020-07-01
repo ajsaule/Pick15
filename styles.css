@@ -12,6 +12,13 @@ body {
     align-items: center;
     background-color: #1d202c;
 }
+.tile-reset {
+    background-color: #293254;
+    border-radius: 50px;
+    display: block;
+    transition: box-shadow 1.3s ease-in-out;
+    box-shadow: none;
+}
 
 .main-heading {
     margin: 0 0 0 20px;
@@ -59,12 +66,12 @@ div.game-grid div {
     transform: scale(1.15);
     transition: transform 0.25s ease-in-out;
     box-shadow: 0 0 25px rgb(0, 0, 255);
+    transition: box-shadow 0.5s ease-in-out;
     cursor: not-allowed;
     border: none; 
 }
 
 .red-player { 
-    /* maybe use an ID for player so it overwrites the old box-shadow */
     /* possibly stop the :hover animation once a tile has been clicked by overriding the pseudoclass 
         - but how to stop it from overriding and preventing the downward ease-in-out transition */
     background-color: #293254;
@@ -76,6 +83,7 @@ div.game-grid div {
     transform: scale(1.15);
     transition: transform 0.25s ease-in-out;
     box-shadow: 0 0 25px rgb(255, 0, 0);
+    transition: box-shadow 0.5s ease-in-out;
     cursor: not-allowed;
     border: none; 
 }
