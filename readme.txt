@@ -32,11 +32,13 @@ The game's objective is to align three consecutive tiles in a row, column or dia
 4. Scoring 
     - Write all scores and messages to the board as game progresses ❌
     - Add + 1 to the winning player's tally ❌
-    - Calculate a percentage of wins for each player 
-    - Reset button resets the stored counts/ board's appearance/ score tally
+    - Calculate a percentage of wins for each player ?
+    - Reset button resets the stored counts of tiles clicked / board's appearance ❌
 
 5. BONUS FEATURES 
+    - Create a glow effect on the three winnig tiles of player
     - Add info pane that on hover or tap shows info on how to play the game 
+    - First one to get to 5 get secret animation activated 
     - Theme changer, allows user to change the bgcolors and glowing effects 
     - Create a bot to play against 
         - Random bot

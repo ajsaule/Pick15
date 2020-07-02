@@ -8,12 +8,14 @@
 // Set variables like score and player turn
 
 const tiles = document.querySelectorAll('.game-grid > div')
-const mainHeading = document.querySelector('.main-heading')
+const gameHeading = document.querySelector('.game-heading')
 const subHeading = document.querySelector('.sub-heading')
 const resetBtn = document.querySelector('#reset-btn')
 const alertMsg = document.querySelector('.alert-messages')
 const blueScoreboard = document.querySelector('.blue-score')
 const redScoreboard = document.querySelector('.red-score')
+const botButton = document.querySelector('.bot-icon')
+var initBotClicked = false;
 var currentPlayersTurn = "red-player"
 var blueScore = 0
 var redScore = 0
@@ -41,6 +43,7 @@ const checkWinner = (player) => {
     // TEST ROWS // any way to include less brackets??
     if ((tiles[0].classList.contains(player)) && (tiles[1].classList.contains(player)) && (tiles[2].classList.contains(player))) {
         isThereWinner = true
+
     } else if ((tiles[3].classList.contains(player)) && (tiles[4].classList.contains(player)) && (tiles[5].classList.contains(player))) {
         isThereWinner = true
     } else if ((tiles[6].classList.contains(player)) && (tiles[7].classList.contains(player)) && (tiles[8].classList.contains(player))) {
@@ -60,13 +63,24 @@ const checkWinner = (player) => {
     } else if ((tiles[6].classList.contains(player)) && (tiles[4].classList.contains(player)) && (tiles[2].classList.contains(player))) {
         isThereWinner = true
     }
-    // ASSIGN WINNER 
-    // could store the below in it's own function? 
+    // ASSIGN AND LOSER
+    assignWinnerLoser()
+    // CHECK FOR DRAW
+    checkDraw()
+}
+
+const assignWinnerLoser = () => {
+    // ASSIGNING WINNER
     if (isThereWinner) {
         gameWinner = currentPlayersTurn
-        alertMsg.textContent = "We have a winner!"
+        // printing winner to the heading..
+        let winnerArr = []
+        winnerArr = gameWinner.split('-')
+        let winningPlayerH1 = winnerArr[0]
+        gameHeading.textContent = `${winningPlayerH1} WINS!!`
+        disableBoard()
     }
-    // ASSIGN LOSER 
+    // ASSIGNING LOSER 
     if (gameWinner === "red-player") {
         redScore += 1
         redScoreboard.textContent = redScore
@@ -76,11 +90,8 @@ const checkWinner = (player) => {
         blueScoreboard.textContent = blueScore
         gameLoser = "red-player"
     }
-    // CHECK FOR DRAW
-    checkDraw()
 }
 
-// 6pm make sure the draw function works?! 
 const checkDraw = () => {
     var tileCount = 0
     var totalTiles = tiles.length
@@ -89,12 +100,16 @@ const checkDraw = () => {
             tileCount++
         }
         if (totalTiles === tileCount) {
-            console.log('its a draw')
+            for (let i = 0; i < tiles.length; i++) {
+                tiles[i].removeEventListener('click', turnHandler)
+            }
+            alertMsg.textContent = "It's a draw"
             // it's a draw.. print the appropriate messages and animations 
         }
     }
 }
 
+// how to stop someone from spamming the others turn when it is bot's turn 
 const turnHandler = () => {
     if (currentPlayersTurn === "blue-player") {
         event.target.classList.add('blue-player')
@@ -107,10 +122,10 @@ const turnHandler = () => {
         alertMsg.textContent = "Blue, go go go!"
         checkWinner(currentPlayersTurn)
         currentPlayersTurn = "blue-player"
+        setTimeout(runBot, 2000)
     }
-    if (isThereWinner) {
-        disableBoard()
-        // enter message for game winner.. print appropriate messages and animations
+    if (event.target.classList.contains('blue-player') || event.target.classList.contains('red-player')) {
+        event.target.removeEventListener('click', turnHandler)
     }
 }
 
@@ -120,6 +135,9 @@ const disableBoard = () => {
         tiles[i].removeEventListener('click', turnHandler)
         if (!tiles[i].classList.contains(gameWinner)) {
             tiles[i].className = "tile-reset"
+        } else {
+            // add appropriate animations when it is a draw... 
+            alertMsg.textContent = "Reset to start again :)"
         }
     }
 }
@@ -127,9 +145,10 @@ const disableBoard = () => {
 const resetBoard = () => {
     for (let i = 0; i < tiles.length; i++) {
         tiles[i].className = "tile"
-        tiles[i].classList.add("tile-dwn")
+        tiles[i].classList.add('tile-dwn')
         alertMsg.textContent = "Board has been reset"
-        isThereWinner = false;
+        gameHeading.textContent = "Pick15"
+        isThereWinner = false
     }
     for (let i = 0; i < tiles.length; i++) {
         tiles[i].addEventListener('click', turnHandler)
@@ -150,4 +169,27 @@ for (let i = 0; i < tiles.length; i++) {
 
 resetBtn.addEventListener('click', resetBoard)
 
-// What event listeners/ handlers do I need to setip to get things working!
+
+// ========================================================== //
+// ==================+++ BOT FUNCTIONS +++=================== //
+// ========================================================== //
+
+// 1:30pm how to get random bot to work??
+
+const initBot = () => {
+    initBotClicked = true
+}
+const runBot = () => {
+    let turnArr = []
+    for (let i = 0; i < tiles.length; i++) {
+        if (!tiles[i].classList.contains('blue-player') && !tiles[i].classList.contains('red-player')) {
+            turnArr = tiles[i].dataset.index
+        }
+    }
+
+    // let randomTile = Math.floor(Math.random() * tilesCounter)
+    // if (initBotClicked === true && currentPlayersTurn === 'blue-player') {
+    //     tiles[randomTile].click()
+    // }
+}
+botButton.addEventListener('click', initBot)
