@@ -36,12 +36,12 @@ The game's objective is to align three consecutive tiles in a row, column or dia
     - Reset button resets the stored counts of tiles clicked / board's appearance ❌
 
 5. BONUS FEATURES 
-    - Create a glow effect on the three winnig tiles of player
+    - Create a glow effect on the three winnig tiles of player ❌
+    - Add confetti animation when someone wins the game ❌
     - Add info pane that on hover or tap shows info on how to play the game 
-    - First one to get to 5 get secret animation activated 
-    - Theme changer, allows user to change the bgcolors and glowing effects 
+    - Theme changer, allows user to change the bgcolors and glowing effects ?
     - Create a bot to play against 
-        - Random bot
+        - Random bot -- Broken 
             - Bot that selects completely random tiles  
         - Smart bot 
             - Bot that selects tiles based on some rough pattern

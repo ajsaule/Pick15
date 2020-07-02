@@ -1,7 +1,7 @@
 // Query select into a var all tile div's
 
 // ========================================================== //
-// ====================== DOM ELEMENTS ====================== //
+// =============== DOM ELEMENTS & /G VARIABLES ============== //
 // ========================================================== //
 
 // Query select into a var listeners to span's and p's of the bottom menu that will display messages
@@ -15,6 +15,7 @@ const alertMsg = document.querySelector('.alert-messages')
 const blueScoreboard = document.querySelector('.blue-score')
 const redScoreboard = document.querySelector('.red-score')
 const botButton = document.querySelector('.bot-icon')
+var selectedTiles = []
 var initBotClicked = false;
 var currentPlayersTurn = "red-player"
 var blueScore = 0
@@ -43,25 +44,48 @@ const checkWinner = (player) => {
     // TEST ROWS // any way to include less brackets??
     if ((tiles[0].classList.contains(player)) && (tiles[1].classList.contains(player)) && (tiles[2].classList.contains(player))) {
         isThereWinner = true
-
+        tiles[0].classList.add(`${player}-glow`)
+        tiles[1].classList.add(`${player}-glow`)
+        tiles[2].classList.add(`${player}-glow`)
     } else if ((tiles[3].classList.contains(player)) && (tiles[4].classList.contains(player)) && (tiles[5].classList.contains(player))) {
         isThereWinner = true
+        tiles[3].classList.add(`${player}-glow`)
+        tiles[4].classList.add(`${player}-glow`)
+        tiles[5].classList.add(`${player}-glow`)
     } else if ((tiles[6].classList.contains(player)) && (tiles[7].classList.contains(player)) && (tiles[8].classList.contains(player))) {
         isThereWinner = true
+        tiles[6].classList.add(`${player}-glow`)
+        tiles[7].classList.add(`${player}-glow`)
+        tiles[8].classList.add(`${player}-glow`)
     }
     // TEST COLUMNS 
     if ((tiles[0].classList.contains(player)) && (tiles[3].classList.contains(player)) && (tiles[6].classList.contains(player))) {
         isThereWinner = true
+        tiles[0].classList.add(`${player}-glow`)
+        tiles[3].classList.add(`${player}-glow`)
+        tiles[6].classList.add(`${player}-glow`)
     } else if ((tiles[1].classList.contains(player)) && (tiles[4].classList.contains(player)) && (tiles[7].classList.contains(player))) {
         isThereWinner = true
+        tiles[1].classList.add(`${player}-glow`)
+        tiles[4].classList.add(`${player}-glow`)
+        tiles[7].classList.add(`${player}-glow`)
     } else if ((tiles[2].classList.contains(player)) && (tiles[5].classList.contains(player)) && (tiles[8].classList.contains(player))) {
         isThereWinner = true
+        tiles[2].classList.add(`${player}-glow`)
+        tiles[5].classList.add(`${player}-glow`)
+        tiles[8].classList.add(`${player}-glow`)
     }
     // TEST DIAGONAL
     if ((tiles[0].classList.contains(player)) && (tiles[4].classList.contains(player)) && (tiles[8].classList.contains(player))) {
         isThereWinner = true
+        tiles[0].classList.add(`${player}-glow`)
+        tiles[4].classList.add(`${player}-glow`)
+        tiles[8].classList.add(`${player}-glow`)
     } else if ((tiles[6].classList.contains(player)) && (tiles[4].classList.contains(player)) && (tiles[2].classList.contains(player))) {
         isThereWinner = true
+        tiles[6].classList.add(`${player}-glow`)
+        tiles[4].classList.add(`${player}-glow`)
+        tiles[2].classList.add(`${player}-glow`)
     }
     // ASSIGN AND LOSER
     assignWinnerLoser()
@@ -77,8 +101,14 @@ const assignWinnerLoser = () => {
         let winnerArr = []
         winnerArr = gameWinner.split('-')
         let winningPlayerH1 = winnerArr[0]
-        gameHeading.textContent = `${winningPlayerH1} WINS!!`
+        gameHeading.textContent = `${winningPlayerH1} wins!`
         disableBoard()
+        setTimeout(confetti({
+            origin: {
+                x: 0.5,
+                y: 1.,
+            }
+        }), 1000)
     }
     // ASSIGNING LOSER 
     if (gameWinner === "red-player") {
@@ -174,18 +204,25 @@ resetBtn.addEventListener('click', resetBoard)
 // ==================+++ BOT FUNCTIONS +++=================== //
 // ========================================================== //
 
-// 1:30pm how to get random bot to work??
+// make an array to store the tiles that have been clicked and update as players make their move
 
 const initBot = () => {
     initBotClicked = true
 }
 const runBot = () => {
-    let turnArr = []
-    for (let i = 0; i < tiles.length; i++) {
-        if (!tiles[i].classList.contains('blue-player') && !tiles[i].classList.contains('red-player')) {
-            turnArr = tiles[i].dataset.index
-        }
-    }
+    // let turnArr = []
+    // for (let i = 0; i < tiles.length; i++) {
+    //     if (!tiles[i].classList.contains('blue-player') && !tiles[i].classList.contains('red-player')) {
+    //         turnArr = tiles[i].dataset.index
+    //     }
+    // }
+
+    // get a numbered array via phillipes method
+    let botBoard = Array.from(tiles);
+    let mappedBoard = botBoard.map(function (move) {
+        return move.dataset.index;
+    });
+    console.log(mappedBoard)
 
     // let randomTile = Math.floor(Math.random() * tilesCounter)
     // if (initBotClicked === true && currentPlayersTurn === 'blue-player') {
