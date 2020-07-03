@@ -145,8 +145,8 @@ const turnHandler = () => {
         event.target.classList.add('blue-player')
         alertMsg.textContent = "Red, its your turn!"
         checkWinner(currentPlayersTurn)
+        // how to push the turn data to the array so bot can know selected tiles tiels ? 
         currentPlayersTurn = "red-player"
-        // insert a message for current players turn 
     } else {
         event.target.classList.add('red-player')
         alertMsg.textContent = "Blue, go go go!"
