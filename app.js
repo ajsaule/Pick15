@@ -15,8 +15,8 @@ const alertMsg = document.querySelector('.alert-messages')
 const blueScoreboard = document.querySelector('.blue-score')
 const redScoreboard = document.querySelector('.red-score')
 const botButton = document.querySelector('.bot-icon')
-var selectedTiles = []
-var initBotClicked = false;
+var randomBotClicked = false;
+var cleverBotClicked = false;
 var currentPlayersTurn = "red-player"
 var blueScore = 0
 var redScore = 0
@@ -147,12 +147,16 @@ const turnHandler = () => {
         checkWinner(currentPlayersTurn)
         // how to push the turn data to the array so bot can know selected tiles tiels ? 
         currentPlayersTurn = "red-player"
-    } else {
+    } else if (currentPlayersTurn === "red-player") {
         event.target.classList.add('red-player')
         alertMsg.textContent = "Blue, go go go!"
         checkWinner(currentPlayersTurn)
         currentPlayersTurn = "blue-player"
-        setTimeout(runBot, 2000)
+        if (randomBotClicked) {
+            setTimeout(runRandomBot, 1000)
+        } else if (cleverBotClicked) {
+            setTimeout(runCleverBot, 1000)
+        }
     }
     if (event.target.classList.contains('blue-player') || event.target.classList.contains('red-player')) {
         event.target.removeEventListener('click', turnHandler)
@@ -160,13 +164,11 @@ const turnHandler = () => {
 }
 
 const disableBoard = () => {
-    // disable all the tile functionalities and add animations, messages, etc. 
     for (let i = 0; i < tiles.length; i++) {
         tiles[i].removeEventListener('click', turnHandler)
         if (!tiles[i].classList.contains(gameWinner)) {
             tiles[i].className = "tile-reset"
         } else {
-            // add appropriate animations when it is a draw... 
             alertMsg.textContent = "Reset to start again :)"
         }
     }
@@ -179,6 +181,7 @@ const resetBoard = () => {
         alertMsg.textContent = "Board has been reset"
         gameHeading.textContent = "Pick15"
         isThereWinner = false
+        currentPlayersTurn = "red-player"
     }
     for (let i = 0; i < tiles.length; i++) {
         tiles[i].addEventListener('click', turnHandler)
@@ -204,29 +207,42 @@ resetBtn.addEventListener('click', resetBoard)
 // ==================+++ BOT FUNCTIONS +++=================== //
 // ========================================================== //
 
-// make an array to store the tiles that have been clicked and update as players make their move
-
-const initBot = () => {
-    initBotClicked = true
+// RANDOM BOT 
+const initRandomBot = () => {
+    randomBotClicked = true
+    alertMsg.textContent = "Random bot activated"
 }
-const runBot = () => {
-    // let turnArr = []
-    // for (let i = 0; i < tiles.length; i++) {
-    //     if (!tiles[i].classList.contains('blue-player') && !tiles[i].classList.contains('red-player')) {
-    //         turnArr = tiles[i].dataset.index
-    //     }
-    // }
-
-    // get a numbered array via phillipes method
-    let botBoard = Array.from(tiles);
-    let mappedBoard = botBoard.map(function (move) {
-        return move.dataset.index;
-    });
-    console.log(mappedBoard)
-
-    // let randomTile = Math.floor(Math.random() * tilesCounter)
-    // if (initBotClicked === true && currentPlayersTurn === 'blue-player') {
-    //     tiles[randomTile].click()
-    // }
+const runRandomBot = () => {
+    let availableTiles = []
+    for (let i = 0; i < tiles.length; i++) {
+        if (!tiles[i].classList.contains('blue-player') && !tiles[i].classList.contains('red-player')) {
+            availableTiles.push(i)
+        }
+    }
+    let botMove = availableTiles[Math.floor(Math.random() * availableTiles.length)]
+    tiles[botMove].click()
 }
-botButton.addEventListener('click', initBot)
+
+botButton.addEventListener('click', initRandomBot)
+
+// CLEVER BOT 
+// const initCleverBot = () => {
+//     cleverBotClicked = true
+//     randomBotClicked = false
+//     alertMsg.textContent = "Clever bot activated"
+// }
+// const runCleverBot = () => {
+//     if (!tiles[4].classList.contains('blue-player') && !tiles[4].classList.contains('red-player')) {
+//         tiles[4].click()
+//     } else if ()
+//     // go for the middle tile first 
+//     // look to see what outer tiles are occupied
+//     // else go for the rest of the available tiles 
+// }
+
+// botButton.addEventListener('dblclick', initCleverBot)
+
+$(".bot-icon").on("tripleclick", function () {
+    randomBotClicked = false
+    cleverBotClicked = false
+});

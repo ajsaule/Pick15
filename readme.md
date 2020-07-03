@@ -4,6 +4,7 @@ Play the demo https://ajsaule.github.io/Project-1-GA/
 
 The game's objective is to align three consecutive tiles in a row, column or diagonally that add to 15. 
 
+
 // include explanation as to how the game works overall
 
 # Program Features 
@@ -38,11 +39,11 @@ The game's objective is to align three consecutive tiles in a row, column or dia
 5. BONUS FEATURES 
     - Create a glow effect on the three winnig tiles of player ❌
     - Add confetti animation when someone wins the game ❌
-    - Add info pane that on hover or tap shows info on how to play the game 
+    - Add info pane that on hover or tap shows extra info on the game ❌
     - Theme changer, allows user to change the bgcolors and glowing effects ?
     - Create a bot to play against 
-        - Random bot -- Broken 
-            - Bot that selects completely random tiles  
+        - Random bot ❌
+            - Bot that selects completely random tiles  ❌
         - Smart bot 
             - Bot that selects tiles based on some rough pattern
                 // maybe middle tile first then corner tiles then outer columns? 

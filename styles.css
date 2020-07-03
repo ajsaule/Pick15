@@ -263,6 +263,11 @@ div.game-grid div {
     div.game-grid div {
         height: 86.66px;
     }
+    div .info-pane p {
+        margin: 5px;
+        font-weight: 500;
+        font-size: 25px;
+    }
 
     .sub-board {
         height: 130px
