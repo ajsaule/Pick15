@@ -18,7 +18,7 @@ div .info-pane {
     font-size: 15px;
     right: 20px;
     top: 15px;
-    cursor: pointer;
+    cursor: context-menu;
 }
 div .info-pane p {
     margin: 15px;
@@ -27,11 +27,13 @@ div .info-pane p {
 }
 .info-pane .info-pane-text {
     visibility: hidden;
-    width: 120px;
+    top: 60px;
+    right: -50px;    
+    width: 160px;
     background-color: black;
     color: #fff;
     text-align: center;
-    padding: 5px 0;
+    padding: 10px;
     border-radius: 6px;
     position: absolute;
     z-index: 1;
@@ -43,9 +45,26 @@ div .info-pane p {
     position: absolute;
     cursor: pointer;
     height: 100px;
-    left: 20px;
-    top: 15px;
+    left: 11px;
+    top: 10px;
 }
+/* hiding the exra bot info for the moment  */
+/* .bot-icon .bot-icon-text {
+    visibility: hidden;
+    top: 60px;
+    left: -50px;    
+    width: 160px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+}
+.bot-icon:hover .bot-icon-text {
+    visibility: visible;
+} */
 
 .tile-reset {
     background-color: #293254;
@@ -172,6 +191,7 @@ div.game-grid div {
     margin-bottom: 20px;
     background-color: #293254;
     text-align: left;
+    position: relative;
 }
 .sub-board p {
     margin-left: 20px;
@@ -181,17 +201,26 @@ div.game-grid div {
 }
 .sub-board button {
     position: absolute;
-    right: 60px;
-    bottom: 50px;
+    right: 20px;
+    bottom: 12px;
+}
+.sub-board button:focus {
+    outline: none;
 }
 #reset-btn {
     background-color: rgba(21, 24, 35, 0.7);
-    border-style: ridge;
+    border-style: solid;
     border-radius: 20px;
     width: 100px;
     font-family: 'MuseoModerno', cursive;
     color: white;
     cursor: pointer;
+}
+#reset-btn:hover {
+    background-color: rgba(42, 44, 49, 0.74);
+}
+#reset-btn:active {
+    background-color: rgb(108, 112, 112);
 }
 
 .red-player-glow {
@@ -276,7 +305,8 @@ div.game-grid div {
         margin-top: 25px;
     }
     .sub-board button {
-        right: 47px;
-        bottom: 50px;
-    }
+        right: 20px;
+        bottom: 18px;
+        }
 }
+

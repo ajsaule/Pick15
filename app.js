@@ -109,6 +109,32 @@ const assignWinnerLoser = () => {
                 y: 1.,
             }
         }), 1000)
+        if (blueScore === 2 || redScore === 2) {
+            confetti({
+                origin: {
+                    x: 0.5,
+                    y: 1.0
+                }
+            })
+            confetti({
+                origin: {
+                    x: 0.5,
+                    y: 0.5
+                }
+            })
+            confetti({
+                origin: {
+                    x: 0.5,
+                    y: 0.7
+                }
+            })
+            confetti({
+                origin: {
+                    x: 0.5,
+                    y: 0.2
+                }
+            })
+        }
     }
     // ASSIGNING LOSER 
     if (gameWinner === "red-player") {
@@ -226,23 +252,76 @@ const runRandomBot = () => {
 botButton.addEventListener('click', initRandomBot)
 
 // CLEVER BOT 
-// const initCleverBot = () => {
-//     cleverBotClicked = true
-//     randomBotClicked = false
-//     alertMsg.textContent = "Clever bot activated"
+const initCleverBot = () => {
+    cleverBotClicked = true
+    randomBotClicked = false
+    alertMsg.textContent = "Clever bot activated"
+}
+const runCleverBot = () => {
+    // go for middle tile first if you can sir 
+    if (!tiles[4].classList.contains('blue-player') && !tiles[4].classList.contains('red-player')) {
+        tiles[4].click()
+    }
+    // test for available tiles with a loop and store them in an array 
+    let availableTiles = []
+    for (let i = 0; i < tiles.length; i++) {
+        if (!tiles[i].classList.contains('blue-player') && !tiles[i].classList.contains('red-player')) {
+            availableTiles.push(i)
+        }
+    }
+    // start the calculated logic to pick next tile
+
+    // why is the below not working??
+    let cornerTiles = [0, 8, 2, 6]// compare available tiles to corner tiles - if there is overlap - store the value in a new array - then select a random item from the new array 
+    var cleverBotChoicesArr = []
+    availableTiles.forEach((t1) => cornerTiles.forEach((t2) => {
+        if (t1 === t2) {
+            cleverBotChoicesArr.push(t1)
+        }
+    }))
+    // select a random tile from those corner tiles 
+    let betweenTiles = [1, 3, 5, 7]
+}
+
+const comparePlayableArrays = (arr1, arr2) => {
+    cleverBotChoicesArr = []
+}
+
+// below method won't work because when only one of the tested tiles fails the block is exited 
+// else if (!tiles[0].classList.contains('blue-player') && !tiles[0].classList.contains('red-player') &&
+//     (!tiles[8].classList.contains('blue-player') && !tiles[8].classList.contains('red-player'))) {
+//     let randomCornerIndexOne = cornerTilesOne[Math.floor(Math.random() * cornerTilesOne.length)]
+//     tiles[randomCornerIndexOne].click() // but will not run when one of the first corners is occupied.. limitation
+// } else if () {
+
 // }
-// const runCleverBot = () => {
-//     if (!tiles[4].classList.contains('blue-player') && !tiles[4].classList.contains('red-player')) {
-//         tiles[4].click()
-//     } else if ()
+
+// .forEeach method, issue is that it bulk selects all the tiles 
+// cornerTiles.forEach(function (tile) {
+//     if (!tiles[tile].classList.contains('blue-player') && !tiles[tile].classList.contains('blue-player')) {
+//         tiles[tile].click()
+//     }
+// })
+
+// how to loop through and checl if each of those positions is occupied? 
+// for (let i = 0; i < cornerTiles.length; i++) {
+//     if (tiles[cornerTiles[i]].classList.contains('blue-player') || tiles[cornerTiles[i]].classList.contains('red-player')) {
+//         tiles[i].click()
+//     } else // potentially just select a random corner tile?
+
+// then go for the rest of the inbetween tiles [1, 3, 5, 7]
+
+
 //     // go for the middle tile first 
 //     // look to see what outer tiles are occupied
+//          // store each outer tile 
 //     // else go for the rest of the available tiles 
 // }
 
-// botButton.addEventListener('dblclick', initCleverBot)
+botButton.addEventListener('dblclick', initCleverBot)
 
 $(".bot-icon").on("tripleclick", function () {
     randomBotClicked = false
     cleverBotClicked = false
-});
+    alertMsg.textContent = "Bot deactivated"
+}) 
