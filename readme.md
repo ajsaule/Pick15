@@ -10,7 +10,7 @@ After research and discovery of mulitple roadblocks regarding my knowledge it wa
 
 The method to check for a winner was using DOM checking contents of class names, then performing multiple tests for each possible winning combination utilising if..else control flow. 
 
-#### Technologies used 
+### Technologies used 
 - JavaScript 
 - HTML/ CSS 
 - npm - canvas-confetti [package](https://www.npmjs.com/package/canvas-confetti)
@@ -22,7 +22,7 @@ Upon playing the game you will realise that the basic idea of Tic-Tac-Toe applie
 
 Red player will start the game, blue will follow. The counter will be incremented once Red or Blue wins, if there is a draw the reset button should be pressed to reset the played tiles and start a new game. 
 
-#### Hidden Features
+### Hidden Features
 - The first player to get to 3 gets a special celebration. 
 - Click on the Robot icon once in the top left for randomness 
 - Click on the Robot twice for a bit more of a challenge (WORK IN PROGRESS)
