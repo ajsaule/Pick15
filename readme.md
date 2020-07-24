@@ -14,7 +14,7 @@ The method to check for a winner was using DOM checking contents of class names,
 - JavaScript 
 - HTML/ CSS 
 - npm - canvas-confetti [package](https://www.npmjs.com/package/canvas-confetti)
-- jQuery (For the triple click)
+- jQuery 
 
 # Program Features 
 
