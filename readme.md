@@ -1,6 +1,6 @@
 # Pick15 Readme 
 
-Play the [demo](https://ajsaule.github.io/Project-1-GA/).
+Play the [demo](https://ajsaule.github.io/Pick15/).
 
 The game's objective is to align three consecutive tiles in a row, column or diagonally that add to 15. 
 
