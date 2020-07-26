@@ -48,23 +48,6 @@ div .info-pane p {
     left: 11px;
     top: 10px;
 }
-/* hiding the exra bot info for the moment  */
-/* .bot-icon .bot-icon-text {
-    visibility: hidden;
-    top: 60px;
-    left: -50px;    
-    width: 160px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    border-radius: 6px;
-    position: absolute;
-    z-index: 1;
-}
-.bot-icon:hover .bot-icon-text {
-    visibility: visible;
-} */
 
 .tile-reset {
     background-color: #293254;
@@ -126,8 +109,6 @@ div.game-grid div {
 }
 
 .red-player { 
-    /* possibly stop the :hover animation once a tile has been clicked by overriding the pseudoclass 
-        - but how to stop it from overriding and preventing the downward ease-in-out transition */
     background-color: #293254;
     border-radius: 50px;
     box-shadow: 0 0 25px rgb(255, 0, 0);
@@ -143,6 +124,7 @@ div.game-grid div {
 }
 
 .game-board {
+    margin-top: 50px;
     position: relative;
     border-radius: 20px;
     width: 500px;
