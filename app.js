@@ -103,12 +103,12 @@ const assignWinnerLoser = () => {
         let winningPlayerH1 = winnerArr[0]
         gameHeading.textContent = `${winningPlayerH1} wins!`
         disableBoard()
-        setTimeout(confetti({
-            origin: {
-                x: 0.5,
-                y: 1.,
-            }
-        }), 1000)
+        // setTimeout(confetti({
+        //     origin: {
+        //         x: 0.5,
+        //         y: 1.,
+        //     }
+        // }), 1000)
         if (blueScore === 2 || redScore === 2) {
             confetti({
                 origin: {
@@ -165,7 +165,6 @@ const checkDraw = () => {
     }
 }
 
-// how to stop someone from spamming the others turn when it is bot's turn 
 const turnHandler = () => {
     if (currentPlayersTurn === "blue-player") {
         event.target.classList.add('blue-player')
