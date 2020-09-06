@@ -109,6 +109,17 @@ const assignWinnerLoser = () => {
         //         y: 1.,
         //     }
         // }), 1000)
+        // ASSIGNING LOSER 
+        if (gameWinner === "red-player") {
+            redScore += 1
+            redScoreboard.textContent = redScore
+            gameLoser = "blue-player"
+        } else if (gameWinner === "blue-player") {
+            blueScore += 1
+            blueScoreboard.textContent = blueScore
+            gameLoser = "red-player"
+        }
+        // SHOOT CONFETTI IF EITHER SIDE SCORE IS === 2 
         if (blueScore === 2 || redScore === 2) {
             confetti({
                 origin: {
@@ -135,16 +146,6 @@ const assignWinnerLoser = () => {
                 }
             })
         }
-    }
-    // ASSIGNING LOSER 
-    if (gameWinner === "red-player") {
-        redScore += 1
-        redScoreboard.textContent = redScore
-        gameLoser = "blue-player"
-    } else if (gameWinner === "blue-player") {
-        blueScore += 1
-        blueScoreboard.textContent = blueScore
-        gameLoser = "red-player"
     }
 }
 
