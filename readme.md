@@ -2,6 +2,8 @@
 
 Play the [demo](https://ajsaule.github.io/Pick15/).
 
+![Pick15 Screenshot](images/project_1.png)
+
 The game's objective is to align three consecutive tiles in a row, column or diagonally that add to 15. 
 
 Initially the game was going to take an input of a number from 1 up to but not including 10 on each tile, and once there were three numbers that add to 15 - the program would signal a winner. 
